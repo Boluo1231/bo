@@ -1,0 +1,154 @@
+/* 页面基础样式：让名片在不同屏幕尺寸下保持舒适的留白 */
+:root {
+    --ink: #20302d;
+    --muted: #78817f;
+    --accent: #d47b5f;
+    --line: #edf0ed;
+    --surface: #ffffff;
+    --page: #f3f5f1;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    color: var(--ink);
+    background: var(--page);
+    font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+
+/* 使用弹性布局将名片固定在页面正中央 */
+.page-wrapper {
+    display: grid;
+    min-height: 100vh;
+    padding: 24px;
+    place-items: center;
+}
+
+/* 名片主体：12px 圆角与柔和阴影营造轻盈的卡片层次 */
+.profile-card {
+    width: min(100%, 390px);
+    padding: 48px 40px 42px;
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid rgba(32, 48, 45, 0.04);
+    border-radius: 12px;
+    box-shadow: 0 18px 45px rgba(46, 63, 58, 0.1), 0 3px 10px rgba(46, 63, 58, 0.04);
+    transition: transform 260ms ease, box-shadow 260ms ease;
+}
+
+/* 鼠标悬停时仅轻微上浮，避免影响内容阅读 */
+.profile-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 52px rgba(46, 63, 58, 0.14), 0 5px 14px rgba(46, 63, 58, 0.05);
+}
+
+.avatar-wrapper {
+    width: 112px;
+    height: 112px;
+    margin: 0 auto 25px;
+    padding: 5px;
+    border: 1px solid #e8ece8;
+    border-radius: 50%;
+}
+
+.avatar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-intro {
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+}
+
+.eyebrow {
+    margin: 0 0 11px;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+h1 {
+    margin: 0;
+    font-family: Georgia, "Songti SC", serif;
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+.job-title {
+    margin: 9px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.bio {
+    max-width: 280px;
+    margin: 19px auto 0;
+    color: #687370;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.contact-list {
+    display: grid;
+    gap: 13px;
+    margin-top: 26px;
+    font-style: normal;
+    text-align: left;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 28px;
+    color: var(--ink);
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 180ms ease;
+}
+
+.contact-item:hover {
+    color: var(--accent);
+}
+
+.contact-icon {
+    display: grid;
+    width: 27px;
+    height: 27px;
+    flex: 0 0 27px;
+    color: var(--accent);
+    background: #fff5f0;
+    border-radius: 50%;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    place-items: center;
+}
+
+@media (max-width: 420px) {
+    .page-wrapper {
+        padding: 16px;
+    }
+
+    .profile-card {
+        padding: 38px 26px 34px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .profile-card,
+    .contact-item {
+        transition: none;
+    }
+}
