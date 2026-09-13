@@ -1,27 +1,29 @@
-/* 页面基础样式：让名片在不同屏幕尺寸下保持舒适的留白 */
+/* 颜色变量：集中管理页面的基础色彩 */
 :root {
-    --ink: #20302d;
-    --muted: #78817f;
-    --accent: #d47b5f;
-    --line: #edf0ed;
-    --surface: #ffffff;
-    --page: #f3f5f1;
+    --text-color: #20302d;
+    --secondary-color: #78817f;
+    --accent-color: #d47b5f;
+    --line-color: #edf0ed;
+    --card-color: #ffffff;
+    --page-color: #f3f5f1;
 }
 
+/* 统一盒模型，避免尺寸计算产生额外偏差 */
 * {
     box-sizing: border-box;
 }
 
+/* 页面基础样式 */
 body {
     min-width: 320px;
     min-height: 100vh;
     margin: 0;
-    color: var(--ink);
-    background: var(--page);
+    color: var(--text-color);
+    background: var(--page-color);
     font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
 }
 
-/* 使用弹性布局将名片固定在页面正中央 */
+/* 使用网格布局，让名片始终位于页面中央 */
 .page-wrapper {
     display: grid;
     min-height: 100vh;
@@ -29,49 +31,49 @@ body {
     place-items: center;
 }
 
-/* 名片主体：12px 圆角与柔和阴影营造轻盈的卡片层次 */
+/* 名片卡片：12px 圆角与柔和阴影 */
 .profile-card {
     width: min(100%, 390px);
     padding: 48px 40px 42px;
     text-align: center;
-    background: var(--surface);
+    background: var(--card-color);
     border: 1px solid rgba(32, 48, 45, 0.04);
     border-radius: 12px;
-    box-shadow: 0 18px 45px rgba(46, 63, 58, 0.1), 0 3px 10px rgba(46, 63, 58, 0.04);
+    box-shadow: 0 18px 45px rgba(46, 63, 58, 0.1),
+        0 3px 10px rgba(46, 63, 58, 0.04);
     transition: transform 260ms ease, box-shadow 260ms ease;
 }
 
-/* 鼠标悬停时仅轻微上浮，避免影响内容阅读 */
+/* 鼠标悬停时卡片轻微上浮 */
 .profile-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 24px 52px rgba(46, 63, 58, 0.14), 0 5px 14px rgba(46, 63, 58, 0.05);
+    box-shadow: 0 24px 52px rgba(46, 63, 58, 0.14),
+        0 5px 14px rgba(46, 63, 58, 0.05);
 }
 
-.avatar-wrapper {
+/* 圆形头像 */
+.avatar {
+    display: block;
     width: 112px;
     height: 112px;
     margin: 0 auto 25px;
     padding: 5px;
+    object-fit: cover;
     border: 1px solid #e8ece8;
     border-radius: 50%;
+    background: var(--card-color);
+    background-clip: padding-box;
 }
 
-.avatar {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.profile-intro {
+/* 姓名与职位区域 */
+.profile-info {
     padding-bottom: 28px;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--line-color);
 }
 
-.eyebrow {
+.profile-label {
     margin: 0 0 11px;
-    color: var(--accent);
+    color: var(--accent-color);
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -82,17 +84,16 @@ h1 {
     font-family: Georgia, "Songti SC", serif;
     font-size: 34px;
     font-weight: 600;
-    letter-spacing: 0;
 }
 
 .job-title {
     margin: 9px 0 0;
-    color: var(--muted);
+    color: var(--secondary-color);
     font-size: 14px;
     letter-spacing: 1px;
 }
 
-.bio {
+.profile-description {
     max-width: 280px;
     margin: 19px auto 0;
     color: #687370;
@@ -100,10 +101,11 @@ h1 {
     line-height: 1.8;
 }
 
+/* 联系方式列表 */
 .contact-list {
     display: grid;
     gap: 13px;
-    margin-top: 26px;
+    margin: 26px 0 0;
     font-style: normal;
     text-align: left;
 }
@@ -113,14 +115,15 @@ h1 {
     align-items: center;
     gap: 13px;
     min-height: 28px;
-    color: var(--ink);
+    color: var(--text-color);
     font-size: 13px;
     text-decoration: none;
     transition: color 180ms ease;
 }
 
+/* 联系方式悬停时改变文字颜色 */
 .contact-item:hover {
-    color: var(--accent);
+    color: var(--accent-color);
 }
 
 .contact-icon {
@@ -128,7 +131,7 @@ h1 {
     width: 27px;
     height: 27px;
     flex: 0 0 27px;
-    color: var(--accent);
+    color: var(--accent-color);
     background: #fff5f0;
     border-radius: 50%;
     font-family: Georgia, serif;
@@ -136,6 +139,7 @@ h1 {
     place-items: center;
 }
 
+/* 小屏设备适配 */
 @media (max-width: 420px) {
     .page-wrapper {
         padding: 16px;
@@ -146,6 +150,7 @@ h1 {
     }
 }
 
+/* 用户开启减少动画时，关闭过渡效果 */
 @media (prefers-reduced-motion: reduce) {
     .profile-card,
     .contact-item {
